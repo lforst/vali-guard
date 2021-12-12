@@ -1,0 +1,10 @@
+[
+    {
+        "path": "dist/vali-guard.cjs.production.min.js",
+        "limit": "1 KB"
+    },
+    {
+        "path": "dist/vali-guard.esm.js",
+        "limit": "1 KB"
+    }
+]
