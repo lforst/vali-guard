@@ -10,6 +10,13 @@ export default class ObjectValidator<V extends ValidationRecord> extends BaseVal
 
     // Do not wrap the guard type into its own type! - it messes with how the TS language server displays the return types
     public validate(subject: unknown): subject is { [P in keyof V]: ValidatorType<V[P]> } {
-        return typeof subject === 'string';
+        return (
+            typeof subject === 'object' &&
+            subject !== null &&
+            !Array.isArray(subject) &&
+            Object.entries(this.validationRecord).every(([key, validator]) =>
+                validator.validate((subject as Record<any, unknown>)[key])
+            )
+        );
     }
 }
