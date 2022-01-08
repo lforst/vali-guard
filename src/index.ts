@@ -1,26 +1,24 @@
-import { IValidator, ValidatorType } from './types';
+import { Validatable, ValidatableRecord, ValidatableType } from './types';
 import StringValidator from './validators/string-validator';
 import NumberValidator from './validators/number-validator';
 import ObjectValidator from './validators/object-validator';
 import DisjunctiveValidator from './validators/disjuncitive-validator';
 
-function string(): IValidator<string> {
+function string(): Validatable<string> {
     return new StringValidator();
 }
-function number(): IValidator<number> {
+function number(): Validatable<number> {
     return new NumberValidator();
 }
 
-function object<R extends Record<string | number | symbol, IValidator<unknown>>>(
-    validationRecord: R
-) {
-    return new ObjectValidator<R>(validationRecord);
+function object<R extends ValidatableRecord>(validationObject: R) {
+    return new ObjectValidator<R>(validationObject);
 }
 
-function oneOf<V extends IValidator<unknown>[]>(
-    ...validators: V
-): IValidator<ValidatorType<V[number]>> {
-    return new DisjunctiveValidator<ValidatorType<V[number]>>(validators);
+function oneOf<V extends Validatable<unknown>[]>(
+    ...validatables: V
+): Validatable<ValidatableType<V[number]>> {
+    return new DisjunctiveValidator<ValidatableType<V[number]>>(validatables);
 }
 
 export default {

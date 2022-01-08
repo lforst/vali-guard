@@ -1,14 +1,17 @@
-import { IValidator } from '../types';
+import { Validatable } from '../types';
 import DisjunctiveValidator from './disjuncitive-validator';
 import NullValidator from './null-validator';
 import UndefinedValidator from './undefined-validator';
 
-export default abstract class BaseValidator<T> implements IValidator<T> {
-    optional(): IValidator<undefined | T> {
+export default abstract class BaseValidator<T> implements Validatable<T> {
+    optional(): Validatable<undefined | T> {
         return new DisjunctiveValidator([this, new UndefinedValidator()]);
     }
 
-    nullable(): IValidator<null | T> {
+    /**
+     * For the return-type inference to work, set `strictNullChecks: true` or `strict: true` in your tsconfig.
+     */
+    nullable(): Validatable<null | T> {
         return new DisjunctiveValidator([this, new NullValidator()]);
     }
 
