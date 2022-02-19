@@ -41,4 +41,4 @@ if (mailingLocationValidator.validate(location)) {
 
 ## How
 
-TypeScript has this really cool thing called [user-defined type guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). Those in combination with [fancy type inference](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types) make it possible for the `validate` to act as a guard for types that are inferred from its input.
+TypeScript has this really cool thing called [user-defined type guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). Those in combination with [fancy type inference](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-8.html#type-inference-in-conditional-types) make it possible for the `validate` function to act as a guard for types that are inferred from its input.
