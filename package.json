@@ -24,10 +24,10 @@
         "prepare": "tsdx build && husky install",
         "size": "size-limit"
     },
-    "peerDependencies": {},
     "name": "vali-guard",
     "author": "lforst",
     "module": "dist/vali-guard.esm.js",
+    "peerDependencies": {},
     "devDependencies": {
         "@size-limit/preset-small-lib": "^7.0.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",

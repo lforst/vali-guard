@@ -1,9 +1,17 @@
-import { Validatable } from '../types';
+import { Validatable, ValidatableType } from '../types';
+import { BaseValidator } from './base-validator';
 
-export default class DisjunctiveValidator<T> implements Validatable<T> {
-    constructor(readonly validators: Validatable<unknown>[]) {}
+export class DisjunctiveValidator<V extends Validatable<unknown>[]>
+    extends BaseValidator<ValidatableType<V[number]>>
+    implements Validatable<ValidatableType<V[number]>> {
+    private readonly validators: V;
 
-    validate(subject: unknown): subject is T {
+    constructor(validators: V) {
+        super();
+        this.validators = validators;
+    }
+
+    validate(subject: unknown): subject is ValidatableType<V[number]> {
         return this.validators.some(validator => validator.validate(subject));
     }
 }
