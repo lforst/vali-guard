@@ -1,5 +1,7 @@
 {
-    "version": "0.1.0",
+    "name": "vali-guard",
+    "description": "A proof-of-concept validation library with TypeScript type-safety.",
+    "version": "1.0.0",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -24,7 +26,6 @@
         "prepare": "tsdx build && husky install",
         "size": "size-limit"
     },
-    "name": "vali-guard",
     "author": "lforst",
     "module": "dist/vali-guard.esm.js",
     "peerDependencies": {},
