@@ -1,8 +1,6 @@
-// @ts-check
-/** @type {import('eslint').Linter.Config} */
 module.exports = {
     root: true,
-    ignorePatterns: ['dist/**/*'],
+    ignorePatterns: ['dist/**/*', 'tests/type-testcases/**/*'],
     overrides: [
         {
             parser: '@typescript-eslint/parser',

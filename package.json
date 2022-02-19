@@ -1,5 +1,7 @@
 {
-    "version": "0.1.0",
+    "name": "vali-guard",
+    "description": "A proof-of-concept validation library with TypeScript type-safety.",
+    "version": "1.0.0",
     "license": "MIT",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -14,6 +16,7 @@
         "watch": "tsdx watch",
         "build": "tsdx build",
         "test": "tsdx test",
+        "typings": "tsc --noEmit --rootDir test/type-definition-tests/**/*.ts",
         "lint": "run-p lint:eslint lint:prettier",
         "lint:eslint": "eslint . --max-warnings=0",
         "lint:prettier": "prettier --check \"{src,test}/**/*.ts\"",
@@ -23,10 +26,9 @@
         "prepare": "tsdx build && husky install",
         "size": "size-limit"
     },
-    "peerDependencies": {},
-    "name": "vali-guard",
     "author": "lforst",
     "module": "dist/vali-guard.esm.js",
+    "peerDependencies": {},
     "devDependencies": {
         "@size-limit/preset-small-lib": "^7.0.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
