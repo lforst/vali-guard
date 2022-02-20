@@ -19,7 +19,7 @@ $ npm install vali-guard
 ```typescript
 import * as guard from 'vali-guard';
 
-const location = ...; // Some unvalidated input?
+const location: unknown = ...; // Some unvalidated input?
 
 const mailingLocationValidator = guard.object({
     country: guard.string(), // <- strings!
