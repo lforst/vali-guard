@@ -7,7 +7,7 @@ export class ObjectValidator<
         [key: number]: Validatable<unknown>;
     }
 > extends BaseValidator<{ [P in keyof V]: ValidatableType<V[P]> }> {
-    constructor(readonly validationRecord: V) {
+    constructor(private readonly validationRecord: V) {
         super();
     }
 
