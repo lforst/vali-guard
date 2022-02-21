@@ -29,7 +29,6 @@
         "watch": "tsdx watch",
         "build": "tsdx build",
         "test": "tsdx test",
-        "typings": "tsc --noEmit --rootDir test/type-definition-tests/**/*.ts",
         "lint": "run-p lint:eslint lint:prettier",
         "lint:eslint": "eslint . --max-warnings=0",
         "lint:prettier": "prettier --check \"{src,test}/**/*.ts\"",
