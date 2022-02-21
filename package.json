@@ -1,16 +1,29 @@
 {
     "name": "vali-guard",
+    "version": "0.0.1",
     "description": "A proof-of-concept validation library with TypeScript type-safety.",
-    "version": "1.0.0",
-    "license": "MIT",
-    "main": "dist/index.js",
-    "typings": "dist/index.d.ts",
-    "files": [
-        "dist",
-        "src"
+    "keywords": [
+        "validation",
+        "schema",
+        "typescript",
+        "typesafe",
+        "typeguards"
     ],
-    "engines": {
-        "node": ">=10"
+    "homepage": "https://github.com/lforst/vali-guard#readme",
+    "bugs": {
+        "url": "https://github.com/lforst/vali-guard/issues"
+    },
+    "license": "MIT",
+    "author": "Luca Forstner (https://github.com/lforst)",
+    "files": [
+        "dist"
+    ],
+    "main": "dist/index.js",
+    "module": "dist/vali-guard.esm.js",
+    "typings": "dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lforst/vali-guard.git"
     },
     "scripts": {
         "watch": "tsdx watch",
@@ -26,9 +39,6 @@
         "prepare": "tsdx build && husky install",
         "size": "size-limit"
     },
-    "author": "lforst",
-    "module": "dist/vali-guard.esm.js",
-    "peerDependencies": {},
     "devDependencies": {
         "@size-limit/preset-small-lib": "^7.0.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
@@ -43,5 +53,8 @@
         "tsdx": "^0.14.1",
         "tslib": "^2.3.1",
         "typescript": "^4.5.3"
+    },
+    "engines": {
+        "node": ">=10"
     }
 }
