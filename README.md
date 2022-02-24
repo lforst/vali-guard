@@ -1,5 +1,8 @@
 # vali-guard
 
+![npm](https://img.shields.io/npm/v/vali-guard)
+![npm bundle size](https://img.shields.io/bundlephobia/minzip/vali-guard?label=gzipped%20size)
+
 > A somewhat flexible proof-of-concept validation library with TypeScript type-safety.
 
 ## Why
