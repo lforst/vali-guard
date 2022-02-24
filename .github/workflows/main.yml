@@ -7,7 +7,7 @@ on:
         branches: [main]
 
 jobs:
-    test:
+    tests:
         name: tests
         runs-on: ubuntu-latest
         steps:
@@ -18,8 +18,19 @@ jobs:
             - run: yarn --frozen-lockfile
             - run: yarn test
 
+    type-tests:
+        name: type-tests
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                  node-version: '16'
+            - run: yarn --frozen-lockfile
+            - run: yarn typetest
+
     lint:
-        name: eslint
+        name: lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -30,7 +41,7 @@ jobs:
             - run: yarn lint:eslint
 
     formatting:
-        name: prettier
+        name: formatting
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2

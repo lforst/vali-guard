@@ -1,4 +1,4 @@
-import * as guard from '../../../src';
+import * as guard from '../../../../src';
 
 // Setup
 const input: unknown = null;
