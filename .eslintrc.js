@@ -1,6 +1,6 @@
 module.exports = {
     root: true,
-    ignorePatterns: ['dist/**/*', 'tests/type-testcases/**/*'],
+    ignorePatterns: ['dist/**/*', 'tests/type-tests/**/*'],
     overrides: [
         {
             parser: '@typescript-eslint/parser',
