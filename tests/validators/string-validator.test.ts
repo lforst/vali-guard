@@ -1,4 +1,4 @@
-import * as guard from '../../src';
+import * as g from '../../src';
 
 describe('StringValidator', () => {
     it.each`
@@ -34,7 +34,7 @@ describe('StringValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('string().validate($input)', ({ input, result }) => {
-        expect(guard.string().validate(input)).toBe(result);
+        expect(g.string().validate(input)).toBe(result);
     });
 
     it.each`
@@ -71,7 +71,7 @@ describe('StringValidator', () => {
         ${Math.sin}           | ${false}
     `('string().nullable().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .string()
                 .nullable()
                 .validate(input)
@@ -112,10 +112,28 @@ describe('StringValidator', () => {
         ${Math.sin}           | ${false}
     `('string().optional().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .string()
                 .optional()
                 .validate(input)
         ).toBe(result);
+    });
+
+    it('should not set a diagnostic when validation succeeds', () => {
+        const guard = g.string();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate('some string', diagnostic)).toBe(true);
+        expect(diagnostic.error).toBeUndefined();
+    });
+
+    it('should set a diagnostic when validation fails', () => {
+        const guard = g.string();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(0, diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
     });
 });

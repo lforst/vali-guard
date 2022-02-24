@@ -1,27 +1,52 @@
-import { Validatable } from '../types';
+import { Validatable, ValidationDiagnostics } from '../types';
 
 export abstract class BaseValidator<T> implements Validatable<T> {
     /**
      * For the return-type inference to work, set `strictNullChecks: true` or `strict: true` in your tsconfig.
      */
-    optional(): Validatable<undefined | T> {
-        return {
-            validate: (subject: unknown): subject is undefined | T => {
-                return this.validate(subject) || typeof subject === 'undefined';
+    optional() {
+        const superValidate = this.validate.bind(this);
+        return new (class extends BaseValidator<undefined | T> {
+            validate(
+                subject: unknown,
+                diagnostics?: ValidationDiagnostics
+            ): subject is undefined | T {
+                const localDiagnostics: ValidationDiagnostics = {};
+                if (superValidate(subject, localDiagnostics) || subject === undefined) {
+                    return true;
+                } else {
+                    if (diagnostics) {
+                        Object.assign(diagnostics, {
+                            error: `${localDiagnostics.error ?? 'unknown error'} AND not undefined`
+                        });
+                    }
+                    return false;
+                }
             }
-        };
+        })();
     }
 
     /**
      * For the return-type inference to work, set `strictNullChecks: true` or `strict: true` in your tsconfig.
      */
-    nullable(): Validatable<null | T> {
-        return {
-            validate: (subject: unknown): subject is null | T => {
-                return this.validate(subject) || subject === null;
+    nullable() {
+        const superValidate = this.validate.bind(this);
+        return new (class extends BaseValidator<null | T> {
+            validate(subject: unknown, diagnostics?: ValidationDiagnostics): subject is null | T {
+                const localDiagnostics: ValidationDiagnostics = {};
+                if (superValidate(subject, localDiagnostics) || subject === null) {
+                    return true;
+                } else {
+                    if (diagnostics) {
+                        Object.assign(diagnostics, {
+                            error: `${localDiagnostics.error ?? 'unknown error'} AND not null`
+                        });
+                    }
+                    return false;
+                }
             }
-        };
+        })();
     }
 
-    abstract validate(subject: unknown): subject is T;
+    abstract validate(subject: unknown, diagnostics?: ValidationDiagnostics): subject is T;
 }

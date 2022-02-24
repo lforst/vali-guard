@@ -1,4 +1,4 @@
-import * as guard from '../../src';
+import * as g from '../../src';
 
 describe('NumberValidator', () => {
     it.each`
@@ -34,7 +34,7 @@ describe('NumberValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('number().validate($input)', ({ input, result }) => {
-        expect(guard.number().validate(input)).toBe(result);
+        expect(g.number().validate(input)).toBe(result);
     });
 
     it.each`
@@ -71,7 +71,7 @@ describe('NumberValidator', () => {
         ${Math.sin}           | ${false}
     `('number().nullable().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .number()
                 .nullable()
                 .validate(input)
@@ -112,10 +112,28 @@ describe('NumberValidator', () => {
         ${Math.sin}           | ${false}
     `('number().optional().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .number()
                 .optional()
                 .validate(input)
         ).toBe(result);
+    });
+
+    it('should not set a diagnostic when validation succeeds', () => {
+        const guard = g.number();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(0, diagnostic)).toBe(true);
+        expect(diagnostic.error).toBeUndefined();
+    });
+
+    it('should set a diagnostic when validation fails', () => {
+        const guard = g.number();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate('some string', diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
     });
 });

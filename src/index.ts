@@ -1,4 +1,4 @@
-import { Validatable } from './types';
+import { Validatable, ValidationDiagnostics } from './types';
 import { StringValidator } from './validators/string-validator';
 import { NumberValidator } from './validators/number-validator';
 import { ObjectValidator } from './validators/object-validator';
@@ -35,4 +35,4 @@ function oneOf<V extends Validatable<unknown>[]>(...validatables: V) {
     return new DisjunctiveValidator(validatables);
 }
 
-export { string, number, object, oneOf, nil, undef };
+export { string, number, object, oneOf, nil, undef, ValidationDiagnostics };
