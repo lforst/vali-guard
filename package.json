@@ -32,10 +32,10 @@
         "typetest": "node ./tests/type-tests/run.js",
         "lint": "run-p lint:eslint lint:prettier",
         "lint:eslint": "eslint . --max-warnings=0",
-        "lint:prettier": "prettier --check \"{src,test}/**/*.ts\"",
+        "lint:prettier": "prettier --check \"{src,tests}/**/*.ts\"",
         "fix": "run-s fix:eslint fix:prettier",
         "fix:eslint": "eslint . --format stylish --fix",
-        "fix:prettier": "prettier --write \"{src,test}/**/*.ts\"",
+        "fix:prettier": "prettier --write \"{src,tests}/**/*.ts\"",
         "prepare": "tsdx build && husky install",
         "size": "size-limit"
     },
