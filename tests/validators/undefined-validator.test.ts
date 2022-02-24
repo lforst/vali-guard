@@ -1,4 +1,4 @@
-import * as guard from '../../src';
+import * as g from '../../src';
 
 describe('UndefinedValidator', () => {
     it.each`
@@ -34,7 +34,7 @@ describe('UndefinedValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('undef().validate($input)', ({ input, result }) => {
-        expect(guard.undef().validate(input)).toBe(result);
+        expect(g.undef().validate(input)).toBe(result);
     });
 
     it.each`
@@ -71,7 +71,7 @@ describe('UndefinedValidator', () => {
         ${Math.sin}           | ${false}
     `('undef().nullable().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .undef()
                 .nullable()
                 .validate(input)
@@ -112,10 +112,28 @@ describe('UndefinedValidator', () => {
         ${Math.sin}           | ${false}
     `('undef().optional().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .undef()
                 .optional()
                 .validate(input)
         ).toBe(result);
+    });
+
+    it('should not set a diagnostic when validation succeeds', () => {
+        const guard = g.undef();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(undefined, diagnostic)).toBe(true);
+        expect(diagnostic.error).toBeUndefined();
+    });
+
+    it('should set a diagnostic when validation fails', () => {
+        const guard = g.undef();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate('some string', diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
     });
 });

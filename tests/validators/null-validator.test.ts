@@ -1,4 +1,4 @@
-import * as guard from '../../src';
+import * as g from '../../src';
 
 describe('NullValidator', () => {
     it.each`
@@ -34,7 +34,7 @@ describe('NullValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('nil().validate($input)', ({ input, result }) => {
-        expect(guard.nil().validate(input)).toBe(result);
+        expect(g.nil().validate(input)).toBe(result);
     });
 
     it.each`
@@ -71,7 +71,7 @@ describe('NullValidator', () => {
         ${Math.sin}           | ${false}
     `('nil().nullable().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .nil()
                 .nullable()
                 .validate(input)
@@ -112,10 +112,28 @@ describe('NullValidator', () => {
         ${Math.sin}           | ${false}
     `('nil().optional().validate($input)', ({ input, result }) => {
         expect(
-            guard
+            g
                 .nil()
                 .optional()
                 .validate(input)
         ).toBe(result);
+    });
+
+    it('should not set a diagnostic when validation succeeds', () => {
+        const guard = g.nil();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(null, diagnostic)).toBe(true);
+        expect(diagnostic.error).toBeUndefined();
+    });
+
+    it('should set a diagnostic when validation fails', () => {
+        const guard = g.nil();
+
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate('some string', diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
     });
 });
