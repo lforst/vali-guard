@@ -1,9 +1,12 @@
-name: Info
+name: Size
 
-on: [pull_request]
+on:
+    pull_request:
+        branches:
+            - main
 
 jobs:
-    size-report:
+    size:
         runs-on: ubuntu-latest
         env:
             CI_JOB_NUMBER: 1
