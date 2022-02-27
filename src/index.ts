@@ -1,38 +1,36 @@
-import { Validatable, ValidationDiagnostics } from './types';
+import { Validatable } from './types';
 import { StringValidator } from './validators/string-validator';
 import { NumberValidator } from './validators/number-validator';
-import { ObjectValidator } from './validators/object-validator';
+import { ObjectValidator, ObjectValidatorOptions } from './validators/object-validator';
 import { DisjunctiveValidator } from './validators/disjuncitive-validator';
 import { NullValidator } from './validators/null-validator';
 import { UndefinedValidator } from './validators/undefined-validator';
 
-function string() {
+export { ValidationDiagnostics } from './types';
+
+export function string() {
     return new StringValidator();
 }
 
-function number() {
+export function number() {
     return new NumberValidator();
 }
 
-function nil() {
+export function nil() {
     return new NullValidator();
 }
 
-function undef() {
+export function undef() {
     return new UndefinedValidator();
 }
 
-function object<
-    V extends {
-        [key: string]: Validatable<unknown>;
-        [key: number]: Validatable<unknown>;
-    }
->(validationObject: V) {
-    return new ObjectValidator<V>(validationObject);
+export function object<V extends Record<string, Validatable<unknown>>>(
+    validationObject: V,
+    options?: ObjectValidatorOptions
+) {
+    return new ObjectValidator<V>(validationObject, options);
 }
 
-function oneOf<V extends Validatable<unknown>[]>(...validatables: V) {
+export function oneOf<V extends Validatable<unknown>[]>(...validatables: V) {
     return new DisjunctiveValidator(validatables);
 }
-
-export { string, number, object, oneOf, nil, undef, ValidationDiagnostics };
