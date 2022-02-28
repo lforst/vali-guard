@@ -1,7 +1,6 @@
 {
     // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
     "include": ["src"],
-    "exclude": ["tests/type-testcases"],
     "compilerOptions": {
         "module": "esnext",
         "lib": ["dom", "esnext"],
