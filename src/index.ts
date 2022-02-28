@@ -1,9 +1,10 @@
 import { Validatable } from './types';
-import { StringValidator } from './validators/string-validator';
-import { NumberValidator } from './validators/number-validator';
-import { ObjectValidator, ObjectValidatorOptions } from './validators/object-validator';
+import { BooleanValidator } from './validators/boolean-validator';
 import { DisjunctiveValidator } from './validators/disjuncitive-validator';
 import { NullValidator } from './validators/null-validator';
+import { NumberValidator } from './validators/number-validator';
+import { ObjectValidator, ObjectValidatorOptions } from './validators/object-validator';
+import { StringValidator } from './validators/string-validator';
 import { UndefinedValidator } from './validators/undefined-validator';
 
 export { ValidationDiagnostics } from './types';
@@ -14,6 +15,10 @@ export function string() {
 
 export function number() {
     return new NumberValidator();
+}
+
+export function boolean() {
+    return new BooleanValidator();
 }
 
 export function nil() {
