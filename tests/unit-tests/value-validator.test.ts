@@ -38,7 +38,7 @@ describe('ValueValidator', () => {
         expect(g.value(...values).validate(input)).toBe(result);
     });
 
-    it('should set a diagnostic when validation succeeds', () => {
+    it('should not set a diagnostic when validation succeeds', () => {
         const guard = g.value(1);
         const diagnostic: g.ValidationDiagnostics = {};
 
