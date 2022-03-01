@@ -7,13 +7,10 @@ export type ValidationDiagnostics = {
      * minor versions.
      */
     error?: string;
-    /**
-     * Indicates where in the subject the validation failed (only for object
-     * and array validators).
-     */
-    // fieldPath?: string;
 };
 
 export interface Validatable<T> {
     validate: (subject: unknown, diagnostics?: ValidationDiagnostics) => subject is T;
 }
+
+export type Primitive = string | number | boolean | undefined | null | symbol | bigint;
