@@ -1,4 +1,4 @@
-import { Validatable } from './types';
+import { Primitive, Validatable } from './types';
 import { BooleanValidator } from './validators/boolean-validator';
 import { DisjunctiveValidator } from './validators/disjuncitive-validator';
 import { NullValidator } from './validators/null-validator';
@@ -7,6 +7,7 @@ import { ObjectValidator, ObjectValidatorOptions } from './validators/object-val
 import { StringValidator } from './validators/string-validator';
 import { UndefinedValidator } from './validators/undefined-validator';
 import { UnknownValidator } from './validators/unknown-validator';
+import { ValueValidator } from './validators/value-validator';
 
 export { ValidationDiagnostics } from './types';
 
@@ -32,6 +33,10 @@ export function undef() {
 
 export function unknown() {
     return new UnknownValidator();
+}
+
+export function value<T extends [Primitive, ...Primitive[]]>(...values: T) {
+    return new ValueValidator(values);
 }
 
 export function object<V extends Record<string, Validatable<unknown>>>(
