@@ -9,7 +9,7 @@ export interface ArrayOfValidatorOptions {
 
 const defaultOptions: ArrayOfValidatorOptions = {
     maxLength: Infinity,
-    minLength: -Infinity
+    minLength: -Infinity,
 };
 
 export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValidator<
@@ -21,7 +21,7 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
         super();
         this.options = {
             ...defaultOptions,
-            ...options
+            ...options,
         };
     }
 
@@ -32,7 +32,7 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
         if (!isArray(subject)) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: 'not array'
+                    error: 'not array',
                 });
             }
             return false;
@@ -41,7 +41,7 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
         if (subject.length > this.options.maxLength) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: `array length exceeds maximum (${this.options.maxLength})`
+                    error: `array length exceeds maximum (${this.options.maxLength})`,
                 });
             }
             return false;
@@ -50,7 +50,7 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
         if (subject.length < this.options.minLength) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: `array length below minimum (${this.options.minLength})`
+                    error: `array length below minimum (${this.options.minLength})`,
                 });
             }
             return false;
@@ -63,7 +63,9 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
             if (!validationResult) {
                 if (diagnostics) {
                     Object.assign(diagnostics, {
-                        error: `Array at index ${i}: (${localDiagnostics.error ?? 'unknown error'})`
+                        error: `Array at index ${i}: (${
+                            localDiagnostics.error ?? 'unknown error'
+                        })`,
                     });
                 }
                 return false;
@@ -76,14 +78,14 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
     maxLength(limit: number) {
         return new ArrayOfValidator(this.validator, {
             ...this.options,
-            maxLength: Math.min(limit, this.options.maxLength)
+            maxLength: Math.min(limit, this.options.maxLength),
         });
     }
 
     minLength(limit: number) {
         return new ArrayOfValidator(this.validator, {
             ...this.options,
-            minLength: Math.max(limit, this.options.minLength)
+            minLength: Math.max(limit, this.options.minLength),
         });
     }
 }

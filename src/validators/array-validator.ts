@@ -24,7 +24,7 @@ export class ArrayValidator<T extends readonly Validatable<unknown>[]> extends B
         if (!isArray(subject)) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: 'not array'
+                    error: 'not array',
                 });
             }
             return false;
@@ -33,7 +33,7 @@ export class ArrayValidator<T extends readonly Validatable<unknown>[]> extends B
         if (subject.length !== this.validationArray.length) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: 'array length does not match'
+                    error: 'array length does not match',
                 });
             }
             return false;
@@ -45,7 +45,7 @@ export class ArrayValidator<T extends readonly Validatable<unknown>[]> extends B
 
             if (!validationResult && diagnostics) {
                 Object.assign(diagnostics, {
-                    error: `Array at index ${i}: (${localDiagnostics.error ?? 'unknown error'})`
+                    error: `Array at index ${i}: (${localDiagnostics.error ?? 'unknown error'})`,
                 });
             }
 

@@ -34,12 +34,7 @@ describe('ArrayOfValidator', () => {
     `(
         'arrayOf(string()).maxLength($maxLength).validate($input)',
         ({ maxLength, input, result }) => {
-            expect(
-                g
-                    .arrayOf(g.string())
-                    .maxLength(maxLength)
-                    .validate(input)
-            ).toBe(result);
+            expect(g.arrayOf(g.string()).maxLength(maxLength).validate(input)).toBe(result);
         }
     );
 
@@ -60,12 +55,7 @@ describe('ArrayOfValidator', () => {
     `(
         'arrayOf(number()).minLength($minLength).validate($input)',
         ({ minLength, input, result }) => {
-            expect(
-                g
-                    .arrayOf(g.number())
-                    .minLength(minLength)
-                    .validate(input)
-            ).toBe(result);
+            expect(g.arrayOf(g.number()).minLength(minLength).validate(input)).toBe(result);
         }
     );
 
@@ -80,46 +70,30 @@ describe('ArrayOfValidator', () => {
         'arrayOf(number()).minLength($minLength).maxLength($maxLength).validate($input)',
         ({ minLength, maxLength, input, result }) => {
             expect(
-                g
-                    .arrayOf(g.number())
-                    .minLength(minLength)
-                    .maxLength(maxLength)
-                    .validate(input)
+                g.arrayOf(g.number()).minLength(minLength).maxLength(maxLength).validate(input)
             ).toBe(result);
         }
     );
 
     it('maxLength should always consider stronger restriction', () => {
-        const guard1 = g
-            .arrayOf(g.number())
-            .maxLength(1)
-            .maxLength(2);
+        const guard1 = g.arrayOf(g.number()).maxLength(1).maxLength(2);
 
         expect(guard1.validate([1])).toBe(true);
         expect(guard1.validate([1, 2])).toBe(false);
 
-        const guard2 = g
-            .arrayOf(g.number())
-            .maxLength(2)
-            .maxLength(1);
+        const guard2 = g.arrayOf(g.number()).maxLength(2).maxLength(1);
 
         expect(guard2.validate([1])).toBe(true);
         expect(guard2.validate([1, 2])).toBe(false);
     });
 
     it('minLength should always consider stronger restriction', () => {
-        const guard1 = g
-            .arrayOf(g.number())
-            .minLength(1)
-            .minLength(2);
+        const guard1 = g.arrayOf(g.number()).minLength(1).minLength(2);
 
         expect(guard1.validate([1])).toBe(false);
         expect(guard1.validate([1, 2])).toBe(true);
 
-        const guard2 = g
-            .arrayOf(g.number())
-            .minLength(2)
-            .minLength(1);
+        const guard2 = g.arrayOf(g.number()).minLength(2).minLength(1);
 
         expect(guard2.validate([1])).toBe(false);
         expect(guard2.validate([1, 2])).toBe(true);
