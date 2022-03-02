@@ -70,12 +70,7 @@ describe('BooleanValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('boolean().nullable().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .boolean()
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.boolean().nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -111,12 +106,7 @@ describe('BooleanValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('boolean().optional().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .boolean()
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.boolean().optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {

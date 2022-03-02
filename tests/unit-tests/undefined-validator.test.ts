@@ -70,12 +70,7 @@ describe('UndefinedValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('undef().nullable().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .undef()
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.undef().nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -111,12 +106,7 @@ describe('UndefinedValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('undef().optional().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .undef()
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.undef().optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {

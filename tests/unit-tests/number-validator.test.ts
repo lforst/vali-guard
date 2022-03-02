@@ -70,12 +70,7 @@ describe('NumberValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('number().nullable().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .number()
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.number().nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -111,12 +106,7 @@ describe('NumberValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('number().optional().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .number()
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.number().optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {

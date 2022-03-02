@@ -30,12 +30,7 @@ describe('DisjunctiveValidator', () => {
         ${g.string()} | ${'string()'} | ${g.number()} | ${'number()'} | ${null}          | ${true}
         ${g.string()} | ${'string()'} | ${g.number()} | ${'number()'} | ${undefined}     | ${false}
     `('oneOf($t1, $t2).nullable().validate($input)', ({ v1, v2, input, result }) => {
-        expect(
-            g
-                .oneOf(v1, v2)
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.oneOf(v1, v2).nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -45,12 +40,7 @@ describe('DisjunctiveValidator', () => {
         ${g.string()} | ${'string()'} | ${g.number()} | ${'number()'} | ${null}          | ${false}
         ${g.string()} | ${'string()'} | ${g.number()} | ${'number()'} | ${undefined}     | ${true}
     `('oneOf($t1, $t2).optional().validate($input)', ({ v1, v2, input, result }) => {
-        expect(
-            g
-                .oneOf(v1, v2)
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.oneOf(v1, v2).optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {

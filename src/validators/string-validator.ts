@@ -7,7 +7,7 @@ export class StringValidator extends BaseValidator<string> {
 
         if (!validationResult && diagnostics) {
             Object.assign(diagnostics, {
-                error: 'not string'
+                error: 'not string',
             });
         }
 

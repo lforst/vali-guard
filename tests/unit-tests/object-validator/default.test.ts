@@ -29,17 +29,12 @@ describe('ExactObjectValidator', () => {
         ${{ a: g.number() }} | ${{ a: 1 }}         | ${true}
         ${{ a: g.number() }} | ${{ a: 1, b: '2' }} | ${false}
     `('object($guard).exact().nullable().validate($input)', ({ guard, input, result }) => {
-        expect(
-            g
-                .object(guard)
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.object(guard).nullable().validate(input)).toBe(result);
     });
 
     it('should not require optional fields to to exist', () => {
         const guard = g.object({
-            a: g.string().optional()
+            a: g.string().optional(),
         });
 
         expect(guard.validate({ a: undefined })).toBe(true);
@@ -48,7 +43,7 @@ describe('ExactObjectValidator', () => {
 
     it('should not set a diagnostic when validation succeeds', () => {
         const guard = g.object({
-            a: g.number()
+            a: g.number(),
         });
 
         const diagnostic: g.ValidationDiagnostics = {};
@@ -59,7 +54,7 @@ describe('ExactObjectValidator', () => {
 
     it('should set a diagnostic when validation fails because of unknown fields', () => {
         const guard = g.object({
-            a: g.string()
+            a: g.string(),
         });
 
         const diagnostic: g.ValidationDiagnostics = {};
@@ -72,7 +67,7 @@ describe('ExactObjectValidator', () => {
 
     it('should set a diagnostic when when subject is not an object', () => {
         const guard = g.object({
-            a: g.string()
+            a: g.string(),
         });
 
         const diagnostic: g.ValidationDiagnostics = {};
@@ -83,7 +78,7 @@ describe('ExactObjectValidator', () => {
 
     it('should set diagnostic for faulty object fields', () => {
         const guard = g.object({
-            a: g.number()
+            a: g.number(),
         });
 
         const diagnostic: g.ValidationDiagnostics = {};
@@ -95,8 +90,8 @@ describe('ExactObjectValidator', () => {
     it('should set diagnostic for nested validation failure', () => {
         const guard = g.object({
             a: g.object({
-                a: g.string()
-            })
+                a: g.string(),
+            }),
         });
 
         const diagnostic: g.ValidationDiagnostics = {};

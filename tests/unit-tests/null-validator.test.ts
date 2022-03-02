@@ -70,12 +70,7 @@ describe('NullValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('nil().nullable().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .nil()
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.nil().nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -111,12 +106,7 @@ describe('NullValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('nil().optional().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .nil()
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.nil().optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {
