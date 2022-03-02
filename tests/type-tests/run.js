@@ -11,6 +11,8 @@ const spinners = new Spinnies({ spinner: cliSpinners.dots });
 const tscBinaryLocation = path.join(__dirname, '../../node_modules/typescript/bin/tsc');
 const tscCLIOptions = '--noEmit --strict';
 
+const cliFilter = process.argv[2];
+
 /**
  * Recursively walks a directory to return the absolute paths of all contained files.
  * @param {string} directory
@@ -35,7 +37,11 @@ const failingFiles = getFilesInDirectory(path.join(__dirname, './testcases/faili
 const tasks = [
     ...compilingFiles.map((f) => ({ file: f, shouldFail: false })),
     ...failingFiles.map((f) => ({ file: f, shouldFail: true })),
-];
+].filter(({ file }) => !cliFilter || file.match(RegExp(cliFilter, 'gi')));
+
+if (cliFilter) {
+    console.log(`Found ${tasks.length} tests matching "${cliFilter}".`);
+}
 
 let testsSucceeded = true;
 const testAmount = tasks.length;
