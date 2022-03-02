@@ -17,7 +17,7 @@ export abstract class BaseValidator<T> implements Validatable<T> {
                 } else {
                     if (diagnostics) {
                         Object.assign(diagnostics, {
-                            error: `${localDiagnostics.error ?? 'unknown error'} AND not undefined`
+                            error: `${localDiagnostics.error ?? 'unknown error'} AND not undefined`,
                         });
                     }
                     return false;
@@ -39,7 +39,7 @@ export abstract class BaseValidator<T> implements Validatable<T> {
                 } else {
                     if (diagnostics) {
                         Object.assign(diagnostics, {
-                            error: `${localDiagnostics.error ?? 'unknown error'} AND not null`
+                            error: `${localDiagnostics.error ?? 'unknown error'} AND not null`,
                         });
                     }
                     return false;

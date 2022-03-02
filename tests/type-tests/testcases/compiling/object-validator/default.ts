@@ -6,8 +6,8 @@ const validationGuard = guard.object({
     a: guard.string(),
     b: guard.object({
         a: guard.number(),
-        b: guard.undef()
-    })
+        b: guard.undef(),
+    }),
 });
 
 // Check

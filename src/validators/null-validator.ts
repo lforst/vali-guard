@@ -7,7 +7,7 @@ export class NullValidator extends BaseValidator<null> {
 
         if (!validationResult && diagnostics) {
             Object.assign(diagnostics, {
-                error: 'not null'
+                error: 'not null',
             });
         }
 

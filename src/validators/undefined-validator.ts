@@ -7,7 +7,7 @@ export class UndefinedValidator extends BaseValidator<undefined> {
 
         if (!validationResult && diagnostics) {
             Object.assign(diagnostics, {
-                error: 'not undefined'
+                error: 'not undefined',
             });
         }
 

@@ -4,7 +4,7 @@ import * as guard from '../../../../src';
 const input: unknown = 1;
 const validationGuard = guard.object({
     a: guard.string(),
-    b: guard.unknown()
+    b: guard.unknown(),
 });
 
 // Check

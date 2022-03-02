@@ -7,7 +7,7 @@ export class BooleanValidator extends BaseValidator<boolean> {
 
         if (!validationResult && diagnostics) {
             Object.assign(diagnostics, {
-                error: 'not boolean'
+                error: 'not boolean',
             });
         }
 

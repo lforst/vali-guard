@@ -31,19 +31,14 @@ describe('ObjectValidator with `allowUnknown: true` option', () => {
     `(
         'object($guard, { allowUnknown: true }).nullable().validate($input)',
         ({ guard, input, result }) => {
-            expect(
-                g
-                    .object(guard, { allowUnknown: true })
-                    .nullable()
-                    .validate(input)
-            ).toBe(result);
+            expect(g.object(guard, { allowUnknown: true }).nullable().validate(input)).toBe(result);
         }
     );
 
     it('should not set a diagnostic when subject contains unknown field', () => {
         const guard = g.object(
             {
-                a: g.number()
+                a: g.number(),
             },
             { allowUnknown: true }
         );

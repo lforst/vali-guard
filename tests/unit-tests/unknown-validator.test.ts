@@ -31,8 +31,8 @@ describe('UnknownValidator', () => {
         /regex/,
         () => undefined,
         class C {},
-        Math.sin
-    ])('should approve any input', input => {
+        Math.sin,
+    ])('should approve any input', (input) => {
         expect(g.unknown().validate(input)).toBe(true);
     });
 
@@ -47,7 +47,7 @@ describe('UnknownValidator', () => {
     it('should allow for unknown fields in object validators', () => {
         const guard = g.object({
             a: g.string(),
-            b: g.unknown()
+            b: g.unknown(),
         });
 
         expect(guard.validate({ a: 'some string', b: 'some value' })).toBe(true);

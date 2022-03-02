@@ -7,7 +7,7 @@ export class NumberValidator extends BaseValidator<number> {
 
         if (!validationResult && diagnostics) {
             Object.assign(diagnostics, {
-                error: 'not number'
+                error: 'not number',
             });
         }
 
