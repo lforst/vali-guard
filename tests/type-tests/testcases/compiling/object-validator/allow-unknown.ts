@@ -8,10 +8,10 @@ const validationGuard = guard.object(
         b: guard.object(
             {
                 a: guard.number(),
-                b: guard.undef()
+                b: guard.undef(),
             },
             { allowUnknown: true }
-        )
+        ),
     },
     { allowUnknown: true }
 );

@@ -70,12 +70,7 @@ describe('StringValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('string().nullable().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .string()
-                .nullable()
-                .validate(input)
-        ).toBe(result);
+        expect(g.string().nullable().validate(input)).toBe(result);
     });
 
     it.each`
@@ -111,12 +106,7 @@ describe('StringValidator', () => {
         ${class C {}}         | ${false}
         ${Math.sin}           | ${false}
     `('string().optional().validate($input)', ({ input, result }) => {
-        expect(
-            g
-                .string()
-                .optional()
-                .validate(input)
-        ).toBe(result);
+        expect(g.string().optional().validate(input)).toBe(result);
     });
 
     it('should not set a diagnostic when validation succeeds', () => {

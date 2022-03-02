@@ -3,7 +3,8 @@ import { BaseValidator } from './base-validator';
 
 export class DisjunctiveValidator<V extends Validatable<unknown>[]>
     extends BaseValidator<ValidatableType<V[number]>>
-    implements Validatable<ValidatableType<V[number]>> {
+    implements Validatable<ValidatableType<V[number]>>
+{
     private readonly validators: V;
 
     constructor(validators: V) {
@@ -15,12 +16,14 @@ export class DisjunctiveValidator<V extends Validatable<unknown>[]>
         subject: unknown,
         diagnostics?: ValidationDiagnostics
     ): subject is ValidatableType<V[number]> {
-        const validationSucceeded = this.validators.some(validator => validator.validate(subject));
+        const validationSucceeded = this.validators.some((validator) =>
+            validator.validate(subject)
+        );
 
         // Assign rejection reason
         if (!validationSucceeded && diagnostics) {
             const validationErrors = this.validators
-                .map(validator => {
+                .map((validator) => {
                     const localDiagnostics: ValidationDiagnostics = {};
                     validator.validate(subject, localDiagnostics);
                     return localDiagnostics.error;
@@ -28,7 +31,7 @@ export class DisjunctiveValidator<V extends Validatable<unknown>[]>
                 .filter((e): e is string => e !== undefined);
 
             Object.assign(diagnostics, {
-                error: validationErrors.map(e => '(' + e + ')').join(' AND ')
+                error: validationErrors.map((e) => '(' + e + ')').join(' AND '),
             });
         }
 

@@ -6,12 +6,12 @@ export interface ObjectValidatorOptions {
 }
 
 const defaultOptions: ObjectValidatorOptions = {
-    allowUnknown: false
+    allowUnknown: false,
 };
 
-export class ObjectValidator<V extends Record<string, Validatable<unknown>>> extends BaseValidator<
-    { [P in keyof V]: ValidatableType<V[P]> }
-> {
+export class ObjectValidator<V extends Record<string, Validatable<unknown>>> extends BaseValidator<{
+    [P in keyof V]: ValidatableType<V[P]>;
+}> {
     private readonly options: ObjectValidatorOptions;
 
     constructor(
@@ -21,7 +21,7 @@ export class ObjectValidator<V extends Record<string, Validatable<unknown>>> ext
         super();
         this.options = {
             ...defaultOptions,
-            ...options
+            ...options,
         };
     }
 
@@ -34,7 +34,7 @@ export class ObjectValidator<V extends Record<string, Validatable<unknown>>> ext
         if (!isObject(subject)) {
             if (diagnostics) {
                 Object.assign(diagnostics, {
-                    error: 'not object'
+                    error: 'not object',
                 });
             }
             return false;
@@ -43,13 +43,13 @@ export class ObjectValidator<V extends Record<string, Validatable<unknown>>> ext
         if (!this.options.allowUnknown) {
             const validatorKeySet = new Set(Object.keys(this.validationRecord));
             const hasUnknownField = Object.keys(subject).find(
-                subjectKey => !validatorKeySet.has(subjectKey)
+                (subjectKey) => !validatorKeySet.has(subjectKey)
             );
 
             if (hasUnknownField) {
                 if (diagnostics) {
                     Object.assign(diagnostics, {
-                        error: `superfluous field "${hasUnknownField}" on object`
+                        error: `superfluous field "${hasUnknownField}" on object`,
                     });
                 }
                 return false;
@@ -65,7 +65,7 @@ export class ObjectValidator<V extends Record<string, Validatable<unknown>>> ext
 
             if (!validationResult && diagnostics) {
                 Object.assign(diagnostics, {
-                    error: `Object field "${key}": (${localDiagnostics.error ?? 'unknown error'})`
+                    error: `Object field "${key}": (${localDiagnostics.error ?? 'unknown error'})`,
                 });
             }
 
