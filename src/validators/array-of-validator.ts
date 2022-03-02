@@ -75,15 +75,15 @@ export class ArrayOfValidator<T extends Validatable<unknown>> extends BaseValida
 
     maxLength(limit: number) {
         return new ArrayOfValidator(this.validator, {
-            minLength: this.options.minLength,
+            ...this.options,
             maxLength: Math.min(limit, this.options.maxLength)
         });
     }
 
     minLength(limit: number) {
         return new ArrayOfValidator(this.validator, {
-            minLength: Math.max(limit, this.options.minLength),
-            maxLength: this.options.maxLength
+            ...this.options,
+            minLength: Math.max(limit, this.options.minLength)
         });
     }
 }
