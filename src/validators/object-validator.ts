@@ -12,7 +12,7 @@ const defaultOptions: ObjectValidatorOptions = {
 export class ObjectValidator<V extends Record<string, Validatable<unknown>>> extends BaseValidator<{
     [P in keyof V]: ValidatableType<V[P]>;
 }> {
-    protected readonly options: ObjectValidatorOptions;
+    private readonly options: ObjectValidatorOptions;
 
     constructor(
         protected readonly validationRecord: V,
