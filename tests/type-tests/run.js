@@ -3,6 +3,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 const childProcess = require('node:child_process');
 const os = require('node:os');
+const Spinnies = require('spinnies');
+const cliSpinners = require('cli-spinners');
+
+const spinners = new Spinnies({ spinner: cliSpinners.dots });
 
 const tscBinaryLocation = path.join(__dirname, '../../node_modules/typescript/bin/tsc');
 const tscCLIOptions = '--noEmit --strict';
@@ -29,8 +33,8 @@ const compilingFiles = getFilesInDirectory(path.join(__dirname, './testcases/com
 const failingFiles = getFilesInDirectory(path.join(__dirname, './testcases/failing'));
 
 const tasks = [
-    ...compilingFiles.map(f => ({ file: f, shouldFail: false })),
-    ...failingFiles.map(f => ({ file: f, shouldFail: true }))
+    ...compilingFiles.map((f) => ({ file: f, shouldFail: false })),
+    ...failingFiles.map((f) => ({ file: f, shouldFail: true })),
 ];
 
 let testsSucceeded = true;
@@ -40,14 +44,14 @@ const fails = [];
 const threads = os.cpus().map(async () => {
     let task = tasks.pop();
     while (task !== undefined) {
-        console.log(`RUNNING: ${task.file}`);
-        await new Promise(resolve => {
+        spinners.add(task.file, { text: task.file });
+        await new Promise((resolve) => {
             childProcess.exec(
                 `${tscBinaryLocation} ${task.file} ${tscCLIOptions}`,
                 (error, stdout, stderr) => {
                     const taskFailed = !!error;
                     if (taskFailed !== task.shouldFail) {
-                        console.log(`FAIL: ${task.file}`);
+                        spinners.fail(task.file);
                         if (task.shouldFail) {
                             fails.push(
                                 `FAIL: File "${task.file}" passed type-check while it should fail.`
@@ -59,7 +63,7 @@ const threads = os.cpus().map(async () => {
                         }
                         testsSucceeded = false;
                     } else {
-                        console.log(`DONE: ${task.file}`);
+                        spinners.succeed(task.file);
                     }
                     resolve();
                 }
@@ -74,7 +78,7 @@ Promise.all(threads).then(() => {
     console.log(`Successfully ran ${testAmount} tests.`);
     if (!testsSucceeded) {
         console.log('Not all testcases returned the expected results:\n');
-        fails.forEach(fail => {
+        fails.forEach((fail) => {
             console.log(`● ${fail}`);
         });
         process.exit(1);
