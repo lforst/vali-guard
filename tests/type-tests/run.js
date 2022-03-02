@@ -41,6 +41,8 @@ const tasks = [
 
 if (cliFilter) {
     console.log(`Found ${tasks.length} tests matching "${cliFilter}".`);
+} else {
+    console.log(`Found ${tasks.length} tests.`);
 }
 
 let testsSucceeded = true;
