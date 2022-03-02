@@ -9,7 +9,7 @@ import { UndefinedValidator } from './validators/undefined-validator';
 import { UnknownValidator } from './validators/unknown-validator';
 import { ValueValidator } from './validators/value-validator';
 
-export { ValidationDiagnostics } from './types';
+export type { ValidationDiagnostics } from './types';
 
 export function string() {
     return new StringValidator();
