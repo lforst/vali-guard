@@ -1,4 +1,5 @@
 import * as g from '../../src';
+import { NonDiagnosingValidator } from './utils/non-diagnosing-validator';
 
 describe('ArrayValidator', () => {
     it.each`
@@ -27,11 +28,35 @@ describe('ArrayValidator', () => {
         expect(diagnostic.error).toBeUndefined();
     });
 
-    it('should set a diagnostic when validation fails', () => {
+    it('should set a diagnostic when subject length does not match', () => {
         const guard = g.array([g.string()]);
         const diagnostic: g.ValidationDiagnostics = {};
 
         expect(guard.validate([], diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
+    });
+
+    it('should set a diagnostic when array item validation failed', () => {
+        const guard = g.array([g.string()]);
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate([1], diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
+    });
+
+    it('should set a diagnostic when subject is not an array', () => {
+        const guard = g.array([g.string()]);
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate('some string', diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
+    });
+
+    it('should still set a diagnostic when a provided validator does not set a diagnostic on failed validation', () => {
+        const guard = g.array([new NonDiagnosingValidator()]);
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(['anything'], diagnostic)).toBe(false);
         expect(diagnostic.error).toBeDefined();
     });
 });
