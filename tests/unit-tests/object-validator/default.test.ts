@@ -1,4 +1,5 @@
 import * as g from '../../../src';
+import { NonDiagnosingValidator } from '../utils/non-diagnosing-validator';
 
 describe('ExactObjectValidator', () => {
     it.each`
@@ -99,6 +100,14 @@ describe('ExactObjectValidator', () => {
         expect(
             guard.validate({ a: { a: 'some string', b: 'some unknown field' } }, diagnostic)
         ).toBe(false);
+        expect(diagnostic.error).toBeDefined();
+    });
+
+    it('should still set a diagnostic when a provided validator does not set a diagnostic on failed validation', () => {
+        const guard = g.object({ a: new NonDiagnosingValidator() });
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate({ a: 'anything' }, diagnostic)).toBe(false);
         expect(diagnostic.error).toBeDefined();
     });
 });
