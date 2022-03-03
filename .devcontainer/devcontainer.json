@@ -27,6 +27,7 @@
     "remoteUser": "node",
     "features": {
         "git": "latest",
-        "github-cli": "latest"
+        "github-cli": "latest",
+        "java": "lts"
     }
 }
