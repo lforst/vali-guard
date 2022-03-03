@@ -81,9 +81,10 @@ Example using the `string`-validator:
 
 ```ts
 import * as guard from 'vali-guard';
+import { ValidationDiagnostics } from 'vali-guard';
 
 const subject: unknown = ...;
-const diagnostics: guard.ValidationDiagnostics = {};
+const diagnostics: ValidationDiagnostics = {};
 
 if (guard.string().validate(subject, diagnostics)) {
     // typeof subject === string
