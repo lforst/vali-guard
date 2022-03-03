@@ -1,6 +1,6 @@
 {
     "name": "vali-guard",
-    "version": "1.0.0-beta.0",
+    "version": "1.0.0",
     "description": "A proof-of-concept validation library with TypeScript type-safety.",
     "keywords": [
         "validation",
