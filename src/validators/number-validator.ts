@@ -3,14 +3,26 @@ import { BaseValidator } from './base-validator';
 
 export class NumberValidator extends BaseValidator<number> {
     validate(subject: unknown, diagnostics?: ValidationDiagnostics): subject is number {
-        const validationResult = typeof subject === 'number';
+        const subjectIsNumber = typeof subject === 'number';
 
-        if (!validationResult && diagnostics) {
-            Object.assign(diagnostics, {
-                error: 'not number',
-            });
+        if (!subjectIsNumber) {
+            if (diagnostics) {
+                Object.assign(diagnostics, {
+                    error: 'not number',
+                });
+            }
+            return false;
         }
 
-        return validationResult;
+        if (Number.isInteger(subject) && !Number.isSafeInteger(subject)) {
+            if (diagnostics) {
+                Object.assign(diagnostics, {
+                    error: 'number not safe',
+                });
+            }
+            return false;
+        }
+
+        return true;
     }
 }

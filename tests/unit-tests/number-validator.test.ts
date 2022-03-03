@@ -118,12 +118,20 @@ describe('NumberValidator', () => {
         expect(diagnostic.error).toBeUndefined();
     });
 
-    it('should set a diagnostic when validation fails', () => {
+    it('should set a diagnostic when subject is not a number', () => {
         const guard = g.number();
 
         const diagnostic: g.ValidationDiagnostics = {};
 
         expect(guard.validate('some string', diagnostic)).toBe(false);
+        expect(diagnostic.error).toBeDefined();
+    });
+
+    it('should set a diagnostic when subject is an unsafe integer number', () => {
+        const guard = g.number();
+        const diagnostic: g.ValidationDiagnostics = {};
+
+        expect(guard.validate(Number.MAX_SAFE_INTEGER + 1, diagnostic)).toBe(false);
         expect(diagnostic.error).toBeDefined();
     });
 });
