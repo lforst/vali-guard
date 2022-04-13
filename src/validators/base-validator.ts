@@ -4,14 +4,14 @@ export abstract class BaseValidator<T> implements Validatable<T> {
     /**
      * For the return-type inference to work, set `strictNullChecks: true` or `strict: true` in your tsconfig.
      */
-    optional() {
+    public optional() {
         return new OptionalValidator(this);
     }
 
     /**
      * For the return-type inference to work, set `strictNullChecks: true` or `strict: true` in your tsconfig.
      */
-    nullable() {
+    public nullable() {
         return new NullableValidator(this);
     }
 

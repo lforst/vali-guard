@@ -12,7 +12,9 @@ import { UndefinedValidator } from './validators/undefined-validator';
 import { UnknownValidator } from './validators/unknown-validator';
 import { ValueValidator } from './validators/value-validator';
 
-export type { ValidationDiagnostics, ValidatableType } from './types';
+export type { ValidatableType, ValidationDiagnostics } from './types';
+export { ValidationError } from './utils/validation-error';
+export { assert } from './utils/assert';
 
 /*@__PURE__*/
 export function string() {

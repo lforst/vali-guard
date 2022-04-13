@@ -59,6 +59,7 @@ if (schema.validate(location)) {
     -   [`oneOf()`](#oneof)
     -   [`array()`](#array)
     -   [`arrayOf()`](#arrayof)
+-   [`assert`](#assert)
 
 ### BaseValidator
 
@@ -369,6 +370,31 @@ minLengthGuard.validate(['A']); // returns false
 minLengthGuard.validate(['A', 'B']); // returns true
 minLengthGuard.validate(['A', 'B', 'C']); // returns true
 minLengthGuard.validate(['A', 'B', 'C', 'D']); // returns false
+```
+
+#### assert()
+
+[assert]: #assert
+
+You can have assert-like functionality by using the `assert` function.
+This function takes any guard and a value to validate.
+It will throw with a `ValidationError` when validation fails.
+
+```ts
+import * as guard from 'vali-guard';
+import { assert, TypeError } from 'vali-guard';
+
+const input: unknown = null;
+const stringGuard = guard.string();
+
+try {
+    assert(stringGuard, input);
+} catch (e) {
+    console.log(e); // TypeError: not string
+    console.log(e instanceof TypeError); // true
+}
+
+// from TypeScripts point of view, input is string here
 ```
 
 ## Why
