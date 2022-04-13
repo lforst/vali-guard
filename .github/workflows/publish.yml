@@ -3,10 +3,6 @@ name: Publish Package
 on:
     workflow_dispatch:
         inputs:
-            branch:
-                description: 'Release branch'
-                required: true
-                default: 'master'
             version:
                 description: 'Version'
                 required: true
