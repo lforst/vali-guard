@@ -13,34 +13,42 @@ import { ValueValidator } from './validators/value-validator';
 
 export type { ValidationDiagnostics } from './types';
 
+/*@__PURE__*/
 export function string() {
     return new StringValidator();
 }
 
+/*@__PURE__*/
 export function number() {
     return new NumberValidator();
 }
 
+/*@__PURE__*/
 export function boolean() {
     return new BooleanValidator();
 }
 
+/*@__PURE__*/
 export function nil() {
     return new NullValidator();
 }
 
+/*@__PURE__*/
 export function undef() {
     return new UndefinedValidator();
 }
 
+/*@__PURE__*/
 export function unknown() {
     return new UnknownValidator();
 }
 
+/*@__PURE__*/
 export function value<T extends [Primitive, ...Primitive[]]>(...values: T) {
     return new ValueValidator(values);
 }
 
+/*@__PURE__*/
 export function object<V extends Record<string, Validatable<unknown>>>(
     validationObject: V,
     options?: ObjectValidatorOptions
@@ -66,14 +74,17 @@ export function object<V extends Record<string, Validatable<unknown>>>(
  * }
  * ```
  */
+/*@__PURE__*/
 export function array<T extends readonly Validatable<unknown>[]>(validationArray: T) {
     return new ArrayValidator(validationArray);
 }
 
+/*@__PURE__*/
 export function arrayOf<T extends Validatable<unknown>>(validator: T) {
     return new ArrayOfValidator(validator);
 }
 
+/*@__PURE__*/
 export function oneOf<V extends [Validatable<unknown>, ...Validatable<unknown>[]]>(
     ...validatables: V
 ) {
