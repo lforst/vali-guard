@@ -11,7 +11,7 @@ import { UndefinedValidator } from './validators/undefined-validator';
 import { UnknownValidator } from './validators/unknown-validator';
 import { ValueValidator } from './validators/value-validator';
 
-export type { ValidationDiagnostics } from './types';
+export type { ValidationDiagnostics, ValidatableType } from './types';
 
 /*@__PURE__*/
 export function string() {
