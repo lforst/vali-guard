@@ -14,6 +14,6 @@ jobs:
                   node-version: '16.x'
                   registry-url: 'https://registry.npmjs.org'
             - run: yarn --frozen-lockfile
-            - run: yarn publish --new-version ${{ github.event.release.tag_name }} ${{ github.event.release.prerelease && '--tag beta' || '' }}
+            - run: yarn publish --new-version ${{ github.event.release.name }} ${{ github.event.release.prerelease && '--tag beta' || '' }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
