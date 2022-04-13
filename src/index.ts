@@ -3,6 +3,7 @@ import { ArrayOfValidator } from './validators/array-of-validator';
 import { ArrayValidator } from './validators/array-validator';
 import { BooleanValidator } from './validators/boolean-validator';
 import { DisjunctiveValidator } from './validators/disjuncitive-validator';
+import { FunctionValidator } from './validators/function-validator';
 import { NullValidator } from './validators/null-validator';
 import { NumberValidator } from './validators/number-validator';
 import { ObjectValidator, ObjectValidatorOptions } from './validators/object-validator';
@@ -41,6 +42,11 @@ export function undef() {
 /*@__PURE__*/
 export function unknown() {
     return new UnknownValidator();
+}
+
+/*@__PURE__*/
+export function fun() {
+    return new FunctionValidator();
 }
 
 /*@__PURE__*/
