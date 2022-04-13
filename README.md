@@ -52,6 +52,7 @@ if (schema.validate(location)) {
     -   [`boolean()`](#boolean)
     -   [`nil()`](#nil)
     -   [`undef()`](#undef)
+    -   [`fun()`](#fun)
     -   [`unknown()`](#unknown)
     -   [`value()`](#value)
     -   [`object()`](#object)
@@ -176,6 +177,18 @@ Validates `undefined` values.
 
 ```ts
 guard.undef().validate(undefined); // returns true
+```
+
+#### fun()
+
+[fun]: #fun
+
+Validates `function` values. Argument and return types cannot be inferred.
+
+```ts
+guard.fun().validate(() => undefined); // returns true
+guard.fun().validate(class C {}); // returns true
+guard.fun().validate(Math.sin); // returns true
 ```
 
 #### unknown()
