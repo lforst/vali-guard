@@ -1,8 +1,19 @@
 name: Publish Package
 
 on:
-    release:
-        types: [published]
+    workflow_dispatch:
+        inputs:
+            branch:
+                description: 'Release branch'
+                required: true
+                default: 'master'
+            version:
+                description: 'Version'
+                required: true
+            beta_release:
+                description: Beta release?
+                required: false
+                type: boolean
 
 jobs:
     publish:
@@ -14,6 +25,6 @@ jobs:
                   node-version: '16.x'
                   registry-url: 'https://registry.npmjs.org'
             - run: yarn --frozen-lockfile
-            - run: yarn publish --new-version ${{ github.event.release.name }} ${{ github.event.release.prerelease && '--tag beta' || '' }}
+            - run: yarn publish --new-version ${{ github.event.inputs.version }} ${{ github.event.inputs.beta_release && '--tag beta' || '' }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
