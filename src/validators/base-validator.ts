@@ -18,7 +18,8 @@ export abstract class BaseValidator<T> implements Validatable<T> {
     abstract validate(subject: unknown, diagnostics?: ValidationDiagnostics): subject is T;
 }
 
-class OptionalValidator<T extends Validatable<unknown>> extends BaseValidator<
+// We export this class eventhough it is local to this file so consuming packages can compile types
+export class OptionalValidator<T extends Validatable<unknown>> extends BaseValidator<
     ValidatableType<T> | undefined
 > {
     constructor(private readonly wrappedValidator: T) {
@@ -49,7 +50,8 @@ class OptionalValidator<T extends Validatable<unknown>> extends BaseValidator<
     }
 }
 
-class NullableValidator<
+// We export this class eventhough it is local to this file so consuming packages can compile types
+export class NullableValidator<
     T extends Validatable<unknown>
 > extends BaseValidator<ValidatableType<T> | null> {
     constructor(private readonly wrappedValidator: T) {
