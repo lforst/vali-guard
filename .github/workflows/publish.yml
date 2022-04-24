@@ -3,13 +3,9 @@ name: Publish Package
 on:
     workflow_dispatch:
         inputs:
-            version:
-                description: 'Version'
-                required: true
-            beta_release:
-                description: Beta release?
+            tag:
+                description: 'Tag (Optional)'
                 required: false
-                type: boolean
 
 jobs:
     publish:
@@ -21,6 +17,6 @@ jobs:
                   node-version: '16.x'
                   registry-url: 'https://registry.npmjs.org'
             - run: yarn --frozen-lockfile
-            - run: yarn publish --new-version ${{ github.event.inputs.version }} ${{ !github.event.inputs.beta_release && '--tag beta' || '' }}
+            - run: yarn publish --non-interactive ${{ !github.event.inputs.tag && '--tag ' + github.event.inputs.tag || '' }}
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
