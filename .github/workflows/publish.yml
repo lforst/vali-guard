@@ -10,6 +10,8 @@ on:
 jobs:
     publish:
         runs-on: ubuntu-latest
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         steps:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v2
@@ -17,6 +19,9 @@ jobs:
                   node-version: '16.x'
                   registry-url: 'https://registry.npmjs.org'
             - run: yarn --frozen-lockfile
-            - run: yarn publish --non-interactive ${{ !github.event.inputs.tag && '--tag ' + github.event.inputs.tag || '' }}
-              env:
-                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+            - if: ${{ github.event.inputs.tag }}
+              name: Publish package with tag
+              run: yarn publish . --non-interactive --tag ${{ github.event.inputs.tag }}
+            - if: ${{ !github.event.inputs.tag }}
+              name: Publish package
+              run: yarn publish . --non-interactive
