@@ -1,6 +1,6 @@
 # vali-guard
 
-[![npm](https://img.shields.io/npm/v/vali-guard)]([test](https://www.npmjs.com/package/vali-guard))
+[![npm](https://img.shields.io/npm/v/vali-guard)](https://www.npmjs.com/package/vali-guard)
 [![npm bundle size](https://img.shields.io/bundlephobia/minzip/vali-guard?label=gzipped%20size)](#)
 
 > A somewhat flexible validation library with first-class TypeScript support.
